@@ -7,7 +7,7 @@
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -21,22 +21,59 @@
             transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
         .header-scrolled {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95); /* Slightly less transparent */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(5px);
         }
+        /* Custom underline for section headers using the accent color */
         .section-header::after {
             content: '';
             display: block;
             width: 70px;
             height: 4px;
-            background-color: #3B82F6;
+            background-color: #F59E0B; /* Amber accent */
             margin: 10px auto 0;
             border-radius: 9999px;
         }
-        .text-blue-800 {
-            color: #1e40af;
+        
+        /* Clear styling for the Subject cards */
+        .subject-card {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-bottom: 4px solid transparent;
+            transition: all 0.3s ease;
         }
+        .subject-card:hover {
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            border-bottom-color: #F59E0B; /* Amber accent on hover */
+            transform: translateY(-2px);
+        }
+
+        /* --- Slideshow CSS --- */
+        .slideshow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0; /* Behind the content */
+        }
+
+        .mySlides {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out; /* Smooth fade effect */
+            background-size: cover;
+            background-position: center;
+            /* Dark overlay for better text contrast */
+            filter: brightness(0.6); 
+            background-repeat: no-repeat;
+        }
+        /* --- End Slideshow CSS --- */
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -45,45 +82,79 @@
     <header id="main-header" class="header-bg fixed top-0 w-full z-50">
         <nav class="container mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center">
             <div class="flex flex-col items-center sm:items-start">
-                <span class="text-2xl font-bold text-blue-600">EduLight</span>
+                <span class="text-3xl font-extrabold text-blue-700">EduLight</span>
                 <span class="text-xs text-gray-500">Education beyond barriers.</span>
             </div>
-            <div class="mt-4 sm:mt-0 flex flex-wrap justify-center space-x-4">
-                <a href="#home" class="text-gray-600 hover:text-blue-600 transition duration-300">Home</a>
-                <a href="#about" class="text-gray-600 hover:text-blue-600 transition duration-300">About Us</a>
-                <a href="#mvvo" class="text-gray-600 hover:text-blue-600 transition duration-300">Our Pillars</a>
-                <a href="#subjects" class="text-gray-600 hover:text-blue-600 transition duration-300">Subjects</a>
-                <a href="#faq" class="text-gray-600 hover:text-blue-600 transition duration-300">FAQ</a>
-                <a href="#contact" class="text-gray-600 hover:text-blue-600 transition duration-300">Contact Us</a>
+            <div class="mt-4 sm:mt-0 flex flex-wrap justify-center space-x-6 font-medium">
+                <a href="#home" class="text-gray-700 hover:text-amber-500 transition duration-300">Home</a>
+                <a href="#about" class="text-gray-700 hover:text-amber-500 transition duration-300">About Us</a>
+                <a href="#mvvo" class="text-gray-700 hover:text-amber-500 transition duration-300">Pillars</a>
+                <a href="#subjects" class="text-gray-700 hover:text-amber-500 transition duration-300">Subjects</a>
+                <a href="#faq" class="text-gray-700 hover:text-amber-500 transition duration-300">FAQ</a>
+                <a href="#contact" class="text-gray-700 hover:text-amber-500 transition duration-300">Contact</a>
             </div>
         </nav>
     </header>
 
     <main>
-        <!-- Hero Section -->
-        <section id="home" class="py-32 md:py-48 text-center bg-gray-100">
-            <div class="container mx-auto px-6">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-blue-800 leading-tight md:leading-snug">
-                    HOME AWAY FROM HOME
-                </h1>
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-700 mt-4">Shining the light of knowledge in every home.</h2>
-                <p class="text-lg md:text-xl text-gray-600 mt-6 max-w-4xl mx-auto">
-                    “Education beyond barriers.”
-                </p>
-                <p class="text-lg md:text-xl text-gray-600 mt-6 max-w-4xl mx-auto">
-                    Offering quality educational environment through our ELearning app and one on one online classes. No child should be limited from getting the BEST!
-                </p>
-                <a href="#about" class="mt-8 inline-block bg-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">
-                    Learn more about our efficient and highly academic prowess.
-                </a>
+        <!-- Hero Section - Designed for high impact and clear CTA -->
+        <!-- Removed bg-blue-600 class from section, background is now handled by the slides -->
+        <section id="home" class="py-24 md:py-32 relative overflow-hidden h-[600px] md:h-auto"> 
+            
+            <!-- Slideshow Background Container -->
+            <div class="slideshow-container">
+                <!-- Slide 1: Focused Learning (Placeholder Image) -->
+                <div class="mySlides" style="background-image: url('image/WhatsApp\ Image\ 2025-10-11\ at\ 23.30.54_6a594046.jpg');"></div>
+                <!-- Slide 2: Interactive Online Class (Placeholder Image) -->
+                <div class="mySlides" style="background-image: url('image/sitting\ in\ office.jpg');"></div>
+                <!-- Slide 3: Dedicated Tutor Support (Placeholder Image) -->
+                <div class="mySlides" style="background-image: url('image/teacher\ in\ class-red\ dress.jpg');"></div>
+            </div>
+
+            <!-- Content Container (Ensure this content is visible on top of the dark slides) -->
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10 text-white">
+                <!-- Left Content: Value Proposition -->
+                <div class="text-left py-8">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+                        HOME AWAY FROM HOME
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl font-light mt-4">
+                        Shining the light of knowledge in every home.
+                    </h2>
+                    <p class="text-lg mt-6 max-w-lg opacity-90">
+                        “Education beyond barriers.” Offering quality educational environment through our ELearning app and one on one online classes. No child should be limited from getting the BEST!
+                    </p>
+                    <a href="#subjects" class="mt-8 inline-block bg-amber-500 text-blue-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-amber-400 transition duration-300 transform hover:scale-105 uppercase tracking-wider">
+                        Explore Our Subjects
+                    </a>
+                </div>
+                
+                <!-- Right Content: Sign-Up/Lead Form Block -->
+                <div class="bg-white p-8 rounded-xl shadow-2xl text-gray-800 border-b-8 border-amber-500 md:w-full md:max-w-md mx-auto">
+                    <h3 class="text-3xl font-bold text-blue-700 mb-4">Start Your Learning Journey!</h3>
+                    <p class="mb-6 text-gray-600">Register now for a free consultation and personalized learning plan.</p>
+                    <form class="space-y-4">
+                        <input type="text" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500 transition duration-150">
+                        <input type="email" placeholder="Email Address" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500 transition duration-150">
+                        <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500 transition duration-150 text-gray-600">
+                            <option value="">Select Grade Level...</option>
+                            <option value="primary">Primary School</option>
+                            <option value="junior">Junior Secondary</option>
+                            <option value="senior">Senior Secondary</option>
+                        </select>
+                        <button type="submit" class="w-full bg-blue-700 text-white font-bold py-3 rounded-lg shadow-md hover:bg-blue-800 transition duration-300 transform hover:scale-[1.01]">
+                            Get Started Free
+                        </button>
+                    </form>
+                </div>
             </div>
         </section>
 
         <!-- About Us Section -->
         <section id="about" class="py-16 md:py-24">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-blue-700 text-center mb-12 section-header">About Us</h2>
-                <div class="bg-white p-8 md:p-12 rounded-xl shadow-xl max-w-5xl mx-auto space-y-6 text-gray-600 leading-relaxed text-lg">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-blue-700 text-center mb-12 section-header">About Us</h2>
+                <div class="bg-white p-8 md:p-12 rounded-xl shadow-2xl max-w-5xl mx-auto space-y-6 text-gray-600 leading-relaxed text-lg border-t-8 border-blue-600">
                     <p>
                         We are a forward-thinking educational initiative committed to transforming the way children in Nigeria learn. Founded by a young African innovator passionate about solving academic challenges, our mission is to make quality education affordable, accessible, and secure for every child—no matter where they live.
                     </p>
@@ -101,50 +172,43 @@
         </section>
 
         <!-- Mission, Vision, Values, Objectives Section -->
-        <section id="mvvo" class="py-16 md:py-24 bg-gray-100">
+        <section id="mvvo" class="py-16 md:py-24 bg-blue-50">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-blue-700 text-center mb-12 section-header">Our Pillars</h2>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-blue-700 text-center mb-12 section-header">Our Pillars</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
                     <!-- Vision Card -->
-                    <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-amber-500 hover:shadow-xl transition duration-300">
                         <h3 class="text-xl font-bold text-blue-600 mb-2">Vision Statement</h3>
                         <p class="text-gray-600 text-sm leading-relaxed">To create a world where every child, regardless of location, financial background, or security challenges, can access quality education through a safe, affordable, and interactive digital learning environment. Bringing out the BEST beyond barriers.</p>
                     </div>
                     <!-- Mission Card -->
-                    <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-amber-500 hover:shadow-xl transition duration-300">
                         <h3 class="text-xl font-bold text-blue-600 mb-2">Mission Statement</h3>
                         <ul class="text-gray-600 space-y-2 text-sm list-disc list-inside">
-                            <li>Providing an affordable eLearning platform that reduces the financial burden of expensive textbooks and learning materials.</li>
-                            <li>Offering secure, flexible, and engaging one-on-one tutoring sessions to bridge academic gaps for children in underserved communities.</li>
-                            <li>Using innovative technology to deliver fun, interactive, and curriculum-aligned lessons that inspire lifelong learning.</li>
-                            <li>Building a supportive digital community where students, parents, and educators collaborate to overcome barriers of distance, insecurity, and high costs in education.</li>
+                            <li>Providing an affordable eLearning platform.</li>
+                            <li>Offering secure, flexible, and engaging one-on-one tutoring sessions.</li>
+                            <li>Using innovative technology to deliver fun, interactive, and curriculum-aligned lessons.</li>
+                            <li>Building a supportive digital community.</li>
                         </ul>
                     </div>
                     <!-- Values Card -->
-                    <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-amber-500 hover:shadow-xl transition duration-300">
                         <h3 class="text-xl font-bold text-blue-600 mb-2">Core Values</h3>
                         <ul class="text-gray-600 space-y-2 text-sm list-disc list-inside">
-                            <li><strong>Accessibility</strong> – Ensuring every child, regardless of financial status or location, has equal access to quality education.</li>
-                            <li><strong>Affordability</strong> – Reducing the financial burden of expensive books and learning resources for parents.</li>
-                            <li><strong>Innovation</strong> – Leveraging technology to create fun, interactive, and engaging learning experiences.</li>
-                            <li><strong>Safety & Security</strong> – Providing a reliable digital environment where children can learn without exposure to insecurity challenges in their communities.</li>
-                            <li><strong>Excellence</strong> – Delivering high-quality tutoring and eLearning content aligned with school curricula.</li>
-                            <li><strong>Inclusiveness</strong> – Bridging the educational gap between urban and rural communities.</li>
-                            <li><strong>Sustainability</strong> – Building a model that not only solves today’s academic challenges but also grows with the future of education in Nigeria, Africa and beyond.</li>
+                            <li><strong>Accessibility</strong> & <strong>Affordability</strong></li>
+                            <li><strong>Innovation</strong> & <strong>Safety & Security</strong></li>
+                            <li><strong>Excellence</strong> & <strong>Inclusiveness</strong></li>
+                            <li><strong>Sustainability</strong></li>
                         </ul>
                     </div>
                     <!-- Objectives Card -->
-                    <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-b-4 border-amber-500 hover:shadow-xl transition duration-300">
                         <h3 class="text-xl font-bold text-blue-600 mb-2">Objectives</h3>
                         <ul class="text-gray-600 space-y-2 text-sm list-disc list-inside">
-                            <li>To provide a low-cost alternative to physical textbooks and expensive school materials by digitizing learning resources.</li>
-                            <li>To create an eLearning platform that delivers curriculum-based lessons through videos, interactive modules, and quizzes.</li>
-                            <li>To establish one-on-one tutoring classes that connect learners with trained educators for personalized academic support.</li>
-                            <li>To improve school attendance and participation by offering safe, home-based digital learning opportunities in insecure regions.</li>
-                            <li>To promote fun and interactive learning that motivates children and improves retention of knowledge.</li>
-                            <li>To support parents and guardians by reducing financial stress and providing tools to track their children’s progress.</li>
-                            <li>To collaborate with schools, NGOs, and governments to expand reach and impact in underserved communities.</li>
-                            <li>To equip learners with digital skills that prepare them for future opportunities in a technology-driven world.</li>
+                            <li>Provide low-cost alternative to physical textbooks.</li>
+                            <li>Create an eLearning platform with videos and modules.</li>
+                            <li>Establish one-on-one tutoring classes.</li>
+                            <li>Improve school attendance and digital skills.</li>
                         </ul>
                     </div>
                 </div>
@@ -154,33 +218,34 @@
         <!-- Subjects Section -->
         <section id="subjects" class="py-16 md:py-24">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-blue-700 text-center mb-12 section-header">Subjects</h2>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-blue-700 text-center mb-12 section-header">Subjects We Offer</h2>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
-                    <div class="bg-white p-6 rounded-xl shadow-md text-center"><h3 class="text-lg font-bold text-blue-600">Mathematics</h3></div>
-                    <div class="bg-white p-6 rounded-xl shadow-md text-center"><h3 class="text-lg font-bold text-blue-600">English</h3></div>
-                    <div class="bg-white p-6 rounded-xl shadow-md text-center"><h3 class="text-lg font-bold text-blue-600">Basic Science</h3></div>
-                    <div class="bg-white p-6 rounded-xl shadow-md text-center"><h3 class="text-lg font-bold text-blue-600">Basic Technology</h3></div>
-                    <div class="bg-white p-6 rounded-xl shadow-md text-center"><h3 class="text-lg font-bold text-blue-600">Agricultural Science</h3></div>
-                    <div class="bg-white p-6 rounded-xl shadow-md text-center"><h3 class="text-lg font-bold text-blue-600">Literature</h3></div>
-                    <div class="bg-white p-6 rounded-xl shadow-md text-center"><h3 class="text-lg font-bold text-blue-600">Biology</h3></div>
-                    <div class="bg-white p-6 rounded-xl shadow-md text-center"><h3 class="text-lg font-bold text-blue-600">Chemistry</h3></div>
-                    <div class="bg-white p-6 rounded-xl shadow-md text-center"><h3 class="text-lg font-bold text-blue-600">Accounting</h3></div>
-                    <div class="bg-white p-6 rounded-xl shadow-md text-center"><h3 class="text-lg font-bold text-blue-600">Marketing</h3></div>
-                    <div class="bg-white p-6 rounded-xl shadow-md text-center"><h3 class="text-lg font-bold text-blue-600">Government</h3></div>
-                    <div class="bg-white p-6 rounded-xl shadow-md text-center"><h3 class="text-lg font-bold text-blue-600">History</h3></div>
+                    <!-- Apply new card class and colors -->
+                    <div class="bg-white p-6 rounded-xl subject-card text-center"><h3 class="text-lg font-bold text-blue-600">Mathematics</h3></div>
+                    <div class="bg-white p-6 rounded-xl subject-card text-center"><h3 class="text-lg font-bold text-blue-600">English</h3></div>
+                    <div class="bg-white p-6 rounded-xl subject-card text-center"><h3 class="text-lg font-bold text-blue-600">Basic Science</h3></div>
+                    <div class="bg-white p-6 rounded-xl subject-card text-center"><h3 class="text-lg font-bold text-blue-600">Basic Technology</h3></div>
+                    <div class="bg-white p-6 rounded-xl subject-card text-center"><h3 class="text-lg font-bold text-blue-600">Agricultural Science</h3></div>
+                    <div class="bg-white p-6 rounded-xl subject-card text-center"><h3 class="text-lg font-bold text-blue-600">Literature</h3></div>
+                    <div class="bg-white p-6 rounded-xl subject-card text-center"><h3 class="text-lg font-bold text-blue-600">Biology</h3></div>
+                    <div class="bg-white p-6 rounded-xl subject-card text-center"><h3 class="text-lg font-bold text-blue-600">Chemistry</h3></div>
+                    <div class="bg-white p-6 rounded-xl subject-card text-center"><h3 class="text-lg font-bold text-blue-600">Accounting</h3></div>
+                    <div class="bg-white p-6 rounded-xl subject-card text-center"><h3 class="text-lg font-bold text-blue-600">Marketing</h3></div>
+                    <div class="bg-white p-6 rounded-xl subject-card text-center"><h3 class="text-lg font-bold text-blue-600">Government</h3></div>
+                    <div class="bg-white p-6 rounded-xl subject-card text-center"><h3 class="text-lg font-bold text-blue-600">History</h3></div>
                 </div>
             </div>
         </section>
         
         <!-- FAQ Section -->
-        <section id="faq" class="py-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-blue-700 mb-10 text-center section-header mx-auto">Frequently Asked Questions</h2>
-            <div class="bg-white p-8 rounded-xl shadow-xl max-w-3xl mx-auto space-y-4">
+        <section id="faq" class="py-16 bg-blue-50">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-blue-700 mb-10 text-center section-header mx-auto">Frequently Asked Questions</h2>
+            <div class="bg-white p-8 rounded-xl shadow-xl max-w-3xl mx-auto space-y-4 border-l-8 border-amber-500">
                 <!-- FAQ Item 1 -->
-                <div class="border-b border-gray-200 py-4">
-                    <button class="faq-toggle w-full text-left font-semibold text-lg text-gray-800 flex justify-between items-center focus:outline-none">
+                <div class="border-b border-gray-100 py-4">
+                    <button class="faq-toggle w-full text-left font-semibold text-lg text-blue-700 flex justify-between items-center focus:outline-none">
                         <span>How does EduLight reduce the cost of education?</span>
-                        <svg class="w-6 h-6 transition-transform transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="w-6 h-6 text-amber-500 transition-transform transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
@@ -189,10 +254,10 @@
                     </div>
                 </div>
                 <!-- FAQ Item 2 -->
-                <div class="border-b border-gray-200 py-4">
-                    <button class="faq-toggle w-full text-left font-semibold text-lg text-gray-800 flex justify-between items-center focus:outline-none">
+                <div class="border-b border-gray-100 py-4">
+                    <button class="faq-toggle w-full text-left font-semibold text-lg text-blue-700 flex justify-between items-center focus:outline-none">
                         <span>How do the one-on-one tutoring sessions work?</span>
-                        <svg class="w-6 h-6 transition-transform transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="w-6 h-6 text-amber-500 transition-transform transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
@@ -201,10 +266,10 @@
                     </div>
                 </div>
                 <!-- FAQ Item 3 -->
-                <div class="border-b border-gray-200 py-4">
-                    <button class="faq-toggle w-full text-left font-semibold text-lg text-gray-800 flex justify-between items-center focus:outline-none">
+                <div class="py-4">
+                    <button class="faq-toggle w-full text-left font-semibold text-lg text-blue-700 flex justify-between items-center focus:outline-none">
                         <span>What subjects are available on the platform?</span>
-                        <svg class="w-6 h-6 transition-transform transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg class="w-6 h-6 text-amber-500 transition-transform transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
@@ -216,78 +281,69 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-16 md:py-24 bg-gray-100">
+        <section id="contact" class="py-16 md:py-24">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-blue-700 text-center mb-12 section-header">Get in Touch</h2>
-                <div class="bg-white p-8 md:p-12 rounded-xl shadow-xl max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-blue-700 text-center mb-12 section-header">Get in Touch</h2>
+                <div class="bg-white p-8 md:p-12 rounded-xl shadow-xl max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 border-r-8 border-blue-600">
                     <!-- Contact Form -->
                     <div class="p-4">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Send us a message</h3>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-amber-500 pb-2">Send us a message</h3>
                         <form action="#" method="POST" class="space-y-4">
                             <div>
                                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                                <input type="text" id="name" name="name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                <input type="text" id="name" name="name" class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-amber-500 focus:border-amber-500 transition duration-150">
                             </div>
                             <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                                <input type="email" id="email" name="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                                <input type="email" id="email" name="email" class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-amber-500 focus:border-amber-500 transition duration-150">
                             </div>
                             <div>
                                 <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-                                <textarea id="message" name="message" rows="4" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+                                <textarea id="message" name="message" rows="4" class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-amber-500 focus:border-amber-500 transition duration-150"></textarea>
                             </div>
-                            <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-md shadow-lg hover:bg-blue-700 transition duration-300">
+                            <button type="submit" class="w-full bg-amber-500 text-blue-900 font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-amber-400 transition duration-300 transform hover:scale-[1.01]">
                                 Send Message
                             </button>
                         </form>
                     </div>
                     <!-- Contact Info, Partners, and Team -->
-                    <div class="p-4 flex flex-col justify-center">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Contact Information</h3>
-                        <ul class="text-gray-600 space-y-4 text-lg">
-                            <li><span class="font-bold">WhatsApp/Call:</span> <a href="tel:+2348105758462" class="text-blue-600 hover:underline">+234 8105758462</a></li>
-                            <li><span class="font-bold">Mail:</span> <a href="mailto:Edulightclass@gmail.com" class="text-blue-600 hover:underline">Edulightclass@gmail.com</a></li>
+                    <div class="p-4 flex flex-col justify-center bg-blue-50 rounded-lg">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-blue-600 pb-2">Contact Information</h3>
+                        <ul class="text-gray-700 space-y-4 text-base">
+                            <li><span class="font-bold">WhatsApp/Call:</span> <a href="tel:+2348105758462" class="text-blue-600 hover:text-amber-500 hover:underline">+234 8105758462</a></li>
+                            <li><span class="font-bold">Mail:</span> <a href="mailto:Edulightclass@gmail.com" class="text-blue-600 hover:text-amber-500 hover:underline">Edulightclass@gmail.com</a></li>
                             <li>
                                 <span class="font-bold">Connect:</span>
                                 <div class="flex space-x-4 mt-2">
                                     <a href="#" class="text-gray-500 hover:text-blue-600 transition duration-300">
+                                        <!-- Twitter Icon SVG -->
                                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.223 6.44l-.248 1.401-4.707 5.074 4.887 6.138h-4.226l-3.376-4.248-3.328 4.248h-4.237l5.06-6.452-4.58-4.945h4.229l2.768 2.978 3.514-2.978h4.265z"></path></svg>
                                     </a>
                                     <a href="#" class="text-gray-500 hover:text-blue-600 transition duration-300">
+                                        <!-- Message/Chat Icon SVG -->
                                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 3.125h-21.35c-.732 0-1.325.593-1.325 1.325v16.125c0 .732.593 1.325 1.325 1.325h16.592l5.083 4.043v-21.493c0-.732-.593-1.325-1.325-1.325zM12 11.25c-2.485 0-4.5 2.015-4.5 4.5s2.015 4.5 4.5 4.5 4.5-2.015 4.5-4.5-2.015-4.5-4.5-4.5zM12 18c-1.242 0-2.25-1.008-2.25-2.25s1.008-2.25 2.25-2.25 2.25 1.008 2.25 2.25-1.008 2.25-2.25 2.25z"></path></svg>
                                     </a>
                                     <a href="#" class="text-gray-500 hover:text-blue-600 transition duration-300">
+                                        <!-- LinkedIn Icon SVG -->
                                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.783 17.514h-3.411v-5.918h3.411v5.918zm-1.705-6.862c-.521-.137-1.125-.26-1.758-.26-1.636 0-2.822.822-2.822 2.658v4.321h-3.411v-5.918h3.411v1.655c.451-.832 1.455-1.655 2.875-1.655 2.373 0 4.192 1.582 4.192 4.965v5.918h3.411v-5.918c0-3.383-1.821-4.965-4.192-4.965zm-8.878-.45c-.933 0-1.503-.668-1.503-1.488 0-.819.57-1.488 1.503-1.488s1.503.668 1.503 1.488c0 .82-.57 1.488-1.503 1.488zm.022-2.915h-.022c-.991 0-1.638 1.254-1.638 2.915h3.276c0-1.661-.647-2.915-1.638-2.915zm10.74 3.365c-.015-.043-.032-.086-.051-.129l-.013-.028h-.002c-1.154-2.502-3.15-4.238-5.321-4.238-1.583 0-2.973.818-3.792 1.944-.452-.832-1.455-1.655-2.875-1.655-2.373 0-4.192 1.582-4.192 4.965v5.918h3.411v-5.918c0-2.227.954-3.111 2.373-3.111 1.419 0 2.373.884 2.373 3.111v5.918h3.411v-5.918c0-3.383-1.821-4.965-4.192-4.965zm.022-2.915h-.022c-.991 0-1.638 1.254-1.638 2.915h3.276c0-1.661-.647-2.915-1.638-2.915z"></path></svg>
                                     </a>
                                 </div>
                             </li>
                         </ul>
                         <div class="mt-8">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Partners</h3>
-                            <ul class="text-gray-600 space-y-2 text-lg list-disc list-inside">
-                                <li>Schools</li>
-                                <li>Teachers</li>
-                                <li>Parents</li>
-                                <li>Students</li>
-                                <li>NGOs</li>
-                                <li>Governments</li>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-blue-600 pb-2">Our Partners</h3>
+                            <ul class="text-gray-700 space-y-2 text-base list-disc list-inside">
+                                <li>Schools, Teachers, Parents, and Students</li>
+                                <li>NGOs & Government Agencies</li>
                             </ul>
                         </div>
                         <div class="mt-8">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Meet Our Team</h3>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-blue-600 pb-2">Meet Our Team</h3>
                             <div class="grid grid-cols-2 gap-4 text-center">
-                                <div class="p-2 rounded-md shadow-md bg-gray-50">
-                                    <h4 class="font-bold text-gray-800">CEO</h4>
-                                </div>
-                                <div class="p-2 rounded-md shadow-md bg-gray-50">
-                                    <h4 class="font-bold text-gray-800">COO</h4>
-                                </div>
-                                <div class="p-2 rounded-md shadow-md bg-gray-50">
-                                    <h4 class="font-bold text-gray-800">HR</h4>
-                                </div>
-                                <div class="p-2 rounded-md shadow-md bg-gray-50">
-                                    <h4 class="font-bold text-gray-800">TUTOR</h4>
-                                </div>
+                                <div class="p-2 rounded-lg shadow-sm bg-white"><h4 class="font-bold text-gray-800">CEO</h4></div>
+                                <div class="p-2 rounded-lg shadow-sm bg-white"><h4 class="font-bold text-gray-800">COO</h4></div>
+                                <div class="p-2 rounded-lg shadow-sm bg-white"><h4 class="font-bold text-gray-800">HR</h4></div>
+                                <div class="p-2 rounded-lg shadow-sm bg-white"><h4 class="font-bold text-gray-800">TUTOR</h4></div>
                             </div>
                         </div>
                     </div>
@@ -297,9 +353,9 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-12">
+    <footer class="bg-gray-900 text-white py-8 mt-12">
         <div class="container mx-auto px-6 text-center">
-            <p>&copy; <span id="currentYear"></span> EduLight. All rights reserved.</p>
+            <p>&copy; <span id="currentYear"></span> EduLight. All rights reserved. | <a href="#" class="text-blue-400 hover:text-amber-500">Privacy Policy</a></p>
         </div>
     </footer>
 
@@ -332,6 +388,42 @@
                 header.classList.remove('header-scrolled');
             }
         });
+        
+        // --- Slideshow Logic ---
+        let slideIndex = 0;
+        
+        // Function to cycle through slides
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            
+            // Hide all slides (set opacity to 0)
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.opacity = 0; 
+            }
+            
+            // Increment index
+            slideIndex++;
+            
+            // Loop back to the first slide
+            if (slideIndex > slides.length) {
+                slideIndex = 1
+            }    
+            
+            // Show the current slide (set opacity to 1)
+            if (slides.length > 0) {
+                slides[slideIndex - 1].style.opacity = 1;
+            }
+            
+            // Change image every 5 seconds (5000ms)
+            setTimeout(showSlides, 5000); 
+        }
+
+        // Start the slideshow when the page loads
+        window.onload = function() {
+            showSlides();
+        };
+        // --- End Slideshow Logic ---
     </script>
 </body>
 </html>
