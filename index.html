@@ -73,6 +73,15 @@
             filter: brightness(0.6); 
             background-repeat: no-repeat;
         }
+
+        @media (max-width: 640px) {
+            .slideshow-container {
+                min-height: 70vh;
+            }
+            .subject-card {
+                min-height: 120px;
+            }
+        }
         /* --- End Slideshow CSS --- */
     </style>
 </head>
@@ -80,12 +89,12 @@
 
     <!-- Header & Navigation -->
     <header id="main-header" class="header-bg fixed top-0 w-full z-50">
-        <nav class="container mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center">
-            <div class="flex flex-col items-center sm:items-start">
+        <nav class="container mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex flex-col items-center sm:items-start text-center sm:text-left">
                 <span class="text-3xl font-extrabold text-blue-700">EduLight</span>
                 <span class="text-xs text-gray-500">Education beyond barriers.</span>
             </div>
-            <div class="mt-4 sm:mt-0 flex flex-wrap justify-center space-x-6 font-medium">
+            <div class="mt-4 sm:mt-0 flex flex-wrap justify-center gap-3 font-medium text-center w-full sm:w-auto">
                 <a href="#home" class="text-gray-700 hover:text-amber-500 transition duration-300">Home</a>
                 <a href="#about" class="text-gray-700 hover:text-amber-500 transition duration-300">About Us</a>
                 <a href="#mvvo" class="text-gray-700 hover:text-amber-500 transition duration-300">Pillars</a>
@@ -99,7 +108,7 @@
     <main>
         <!-- Hero Section - Designed for high impact and clear CTA -->
         <!-- Removed bg-blue-600 class from section, background is now handled by the slides -->
-        <section id="home" class="py-24 md:py-32 relative overflow-hidden h-[600px] md:h-auto"> 
+        <section id="home" class="pt-28 pb-24 md:py-32 relative overflow-hidden min-h-[70vh] md:min-h-[600px]"> 
             
             <!-- Slideshow Background Container -->
             <div class="slideshow-container">
