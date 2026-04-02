@@ -89,18 +89,18 @@
 
     <!-- Header & Navigation -->
     <header id="main-header" class="header-bg fixed top-0 w-full z-50">
-        <nav class="container mx-auto px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div class="flex flex-col items-center sm:items-start text-center sm:text-left">
-                <span class="text-3xl font-extrabold text-blue-700">EduLight</span>
-                <span class="text-xs text-gray-500">Education beyond barriers.</span>
+        <nav class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                <span class="text-3xl font-extrabold text-slate-900">EduLight</span>
+                <span class="text-xs text-slate-500">Education beyond barriers.</span>
             </div>
-            <div class="mt-4 sm:mt-0 flex flex-wrap justify-center gap-3 font-medium text-center w-full sm:w-auto">
-                <a href="#home" class="text-gray-700 hover:text-amber-500 transition duration-300">Home</a>
-                <a href="#about" class="text-gray-700 hover:text-amber-500 transition duration-300">About Us</a>
-                <a href="#mvvo" class="text-gray-700 hover:text-amber-500 transition duration-300">Pillars</a>
-                <a href="#subjects" class="text-gray-700 hover:text-amber-500 transition duration-300">Subjects</a>
-                <a href="#faq" class="text-gray-700 hover:text-amber-500 transition duration-300">FAQ</a>
-                <a href="#contact" class="text-gray-700 hover:text-amber-500 transition duration-300">Contact</a>
+            <div class="mt-4 md:mt-0 flex flex-wrap justify-center gap-3 font-medium text-sm text-slate-700 w-full md:w-auto">
+                <a href="#home" class="hover:text-amber-500 transition duration-300">Home</a>
+                <a href="#about" class="hover:text-amber-500 transition duration-300">About</a>
+                <a href="#mvvo" class="hover:text-amber-500 transition duration-300">Pillars</a>
+                <a href="#subjects" class="hover:text-amber-500 transition duration-300">Subjects</a>
+                <a href="#faq" class="hover:text-amber-500 transition duration-300">FAQ</a>
+                <a href="#contact" class="hover:text-amber-500 transition duration-300">Contact</a>
             </div>
         </nav>
     </header>
@@ -112,13 +112,11 @@
             
             <!-- Slideshow Background Container -->
             <div class="slideshow-container">
-                <!-- Slide 1: Focused Learning (Placeholder Image) -->
                 <div class="mySlides" style="background-image: url('image/WhatsApp\ Image\ 2025-10-11\ at\ 23.30.54_6a594046.jpg');"></div>
-                <!-- Slide 2: Interactive Online Class (Placeholder Image) -->
                 <div class="mySlides" style="background-image: url('image/sitting\ in\ office.jpg');"></div>
-                <!-- Slide 3: Dedicated Tutor Support (Placeholder Image) -->
                 <div class="mySlides" style="background-image: url('image/teacher\ in\ class-red\ dress.jpg');"></div>
             </div>
+            <div class="absolute inset-0 bg-slate-950/30"></div>
 
             <!-- Content Container (Ensure this content is visible on top of the dark slides) -->
             <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10 text-white">
@@ -139,20 +137,20 @@
                 </div>
                 
                 <!-- Right Content: Sign-Up/Lead Form Block -->
-                <div class="bg-white p-8 rounded-xl shadow-2xl text-gray-800 border-b-8 border-amber-500 md:w-full md:max-w-md mx-auto">
-                    <h3 class="text-3xl font-bold text-blue-700 mb-4">Start Your Learning Journey!</h3>
-                    <p class="mb-6 text-gray-600">Register now for a free consultation and personalized learning plan.</p>
+                <div class="bg-white p-8 rounded-3xl shadow-2xl text-slate-900 border border-slate-200 md:w-full md:max-w-md mx-auto">
+                    <h3 class="text-3xl font-semibold text-slate-900 mb-4">Start Your Learning Journey</h3>
+                    <p class="mb-6 text-slate-600">Register today for a free consultation and a learning plan built for your child.</p>
                     <form class="space-y-4">
-                        <input type="text" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500 transition duration-150">
-                        <input type="email" placeholder="Email Address" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500 transition duration-150">
-                        <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500 transition duration-150 text-gray-600">
+                        <input type="text" placeholder="Your Name" class="w-full p-3 border border-slate-300 rounded-2xl focus:ring-amber-500 focus:border-amber-500 transition duration-150">
+                        <input type="email" placeholder="Email Address" class="w-full p-3 border border-slate-300 rounded-2xl focus:ring-amber-500 focus:border-amber-500 transition duration-150">
+                        <select class="w-full p-3 border border-slate-300 rounded-2xl focus:ring-amber-500 focus:border-amber-500 transition duration-150 text-slate-600">
                             <option value="">Select Grade Level...</option>
                             <option value="primary">Primary School</option>
                             <option value="junior">Junior Secondary</option>
                             <option value="senior">Senior Secondary</option>
                         </select>
-                        <button type="submit" class="w-full bg-blue-700 text-white font-bold py-3 rounded-lg shadow-md hover:bg-blue-800 transition duration-300 transform hover:scale-[1.01]">
-                            Get Started Free
+                        <button type="submit" class="w-full bg-slate-900 text-white font-semibold py-3 rounded-2xl shadow-lg hover:bg-slate-800 transition duration-300">
+                            Request a Free Call
                         </button>
                     </form>
                 </div>
@@ -375,12 +373,28 @@
                             </ul>
                         </div>
                         <div class="mt-8">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-blue-600 pb-2">Meet Our Team</h3>
-                            <div class="grid grid-cols-2 gap-4 text-center">
-                                <div class="p-2 rounded-lg shadow-sm bg-white"><h4 class="font-bold text-gray-800">CEO</h4></div>
-                                <div class="p-2 rounded-lg shadow-sm bg-white"><h4 class="font-bold text-gray-800">COO</h4></div>
-                                <div class="p-2 rounded-lg shadow-sm bg-white"><h4 class="font-bold text-gray-800">HR</h4></div>
-                                <div class="p-2 rounded-lg shadow-sm bg-white"><h4 class="font-bold text-gray-800">TUTOR</h4></div>
+                            <h3 class="text-2xl font-bold text-slate-900 mb-6 border-b-2 border-blue-600 pb-2">Meet Our Team</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div class="bg-white p-6 rounded-3xl shadow-lg text-center">
+                                    <img src="https://via.placeholder.com/160" alt="CEO" class="w-28 h-28 mx-auto rounded-full object-cover border-4 border-amber-500 shadow-sm">
+                                    <p class="mt-5 text-lg font-semibold text-slate-900">Jane Doe</p>
+                                    <p class="text-sm text-slate-500">Chief Executive Officer</p>
+                                </div>
+                                <div class="bg-white p-6 rounded-3xl shadow-lg text-center">
+                                    <img src="https://via.placeholder.com/160" alt="COO" class="w-28 h-28 mx-auto rounded-full object-cover border-4 border-amber-500 shadow-sm">
+                                    <p class="mt-5 text-lg font-semibold text-slate-900">Samuel Ade</p>
+                                    <p class="text-sm text-slate-500">Chief Operations Officer</p>
+                                </div>
+                                <div class="bg-white p-6 rounded-3xl shadow-lg text-center">
+                                    <img src="https://via.placeholder.com/160" alt="HR Lead" class="w-28 h-28 mx-auto rounded-full object-cover border-4 border-amber-500 shadow-sm">
+                                    <p class="mt-5 text-lg font-semibold text-slate-900">Amina Yusuf</p>
+                                    <p class="text-sm text-slate-500">HR & Community Lead</p>
+                                </div>
+                                <div class="bg-white p-6 rounded-3xl shadow-lg text-center">
+                                    <img src="https://via.placeholder.com/160" alt="Tutor" class="w-28 h-28 mx-auto rounded-full object-cover border-4 border-amber-500 shadow-sm">
+                                    <p class="mt-5 text-lg font-semibold text-slate-900">David Nwosu</p>
+                                    <p class="text-sm text-slate-500">Senior Tutor</p>
+                                </div>
                             </div>
                         </div>
                     </div>
